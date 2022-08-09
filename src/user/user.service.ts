@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 export class UserService {
   constructor(
     @Inject(USER_REPOSITORY) private userRepository: Repository<UserEntity>,
-  ) {}
+  ) {
+  }
 
   findById(id: string): Observable<UserEntity> {
     return from(this.userRepository.findOne({ where: { id } }));
@@ -29,7 +30,13 @@ export class UserService {
   }
 
   async registerUser(data: RegisterDto) {
-    const registerUser = await UserEntity.create(data);
-    return this.userRepository.save(registerUser);
+    const registerInfo = await UserEntity.create(data);
+    const registerUser = await this.userRepository.save(registerInfo);
+    delete registerUser['password'];
+    return registerUser;
+  }
+
+  deleteById(id: string): Observable<any> {
+    return from(this.userRepository.delete({ id }));
   }
 }
