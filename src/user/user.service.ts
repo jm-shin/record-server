@@ -4,6 +4,7 @@ import { UserEntity } from '../database/user/user.entity';
 import { USER_REPOSITORY } from '../database/database.constants';
 import { RegisterDto } from './register.dto';
 import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -12,7 +13,19 @@ export class UserService {
   ) {}
 
   findById(id: string): Observable<UserEntity> {
-    return from(this.userRepository.findOne({ where: { id: id } }));
+    return from(this.userRepository.findOne({ where: { id } }));
+  }
+
+  existsById(id: string): Observable<boolean> {
+    return from(this.userRepository.count({ where: { id } })).pipe(
+      map((m) => !!m),
+    );
+  }
+
+  existsByEmail(email: string): Observable<boolean> {
+    return from(this.userRepository.count({ where: { email } })).pipe(
+      map((m) => !!m),
+    );
   }
 
   async registerUser(data: RegisterDto) {
