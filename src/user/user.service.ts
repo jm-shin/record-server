@@ -39,4 +39,12 @@ export class UserService {
   deleteById(id: string): Observable<any> {
     return from(this.userRepository.delete({ id }));
   }
+
+  checkById(id: string) {
+    return this.userRepository.count({ where: { id } });
+  }
+
+  checkByEmail(email: string) {
+    return this.userRepository.count({ where: { email } });
+  }
 }

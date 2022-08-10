@@ -17,6 +17,6 @@ export class UserController {
     return this.userService.deleteById(id);
   }
 
-  @Put(':id')
-  putUser(@Param('id') id: string, @Body() body) {}
+  // @Put(':id')
+  // putUser(@Param('id') id: string, @Body() body) {}
 }

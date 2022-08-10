@@ -13,6 +13,7 @@ export const mysqlDatabaseProviders = [
         password: 'root',
         database: 'test',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        logging: true,
       });
 
       return dataSource.initialize();
