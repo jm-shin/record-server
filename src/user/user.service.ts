@@ -11,6 +11,7 @@ import { EMPTY, filter, from, mergeMap, Observable, of } from 'rxjs';
 import { map, throwIfEmpty } from 'rxjs/operators';
 import { RegisterUserDto } from './dto/register.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+import { isNotEmpty } from 'class-validator';
 
 @Injectable()
 export class UserService {
@@ -61,7 +62,12 @@ export class UserService {
   }
 
   deleteById(id: string): Observable<any> {
-    return from(this.userRepository.delete({ id }));
+    return from(this.userRepository.delete({ id })).pipe(
+      map((result) => {
+        if (!result.affected)
+          throw new NotFoundException('delete id not found');
+      }),
+    );
   }
 
   checkById(id: string) {
