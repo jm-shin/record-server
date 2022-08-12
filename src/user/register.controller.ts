@@ -8,16 +8,16 @@ import {
   Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { RegisterDto } from './register.dto';
 import { mergeMap } from 'rxjs';
 import { Response } from 'express';
+import { RegisterUserDto } from './dto/register.user.dto';
 
 @Controller('register')
 export class RegisterController {
   constructor(private userService: UserService) {}
 
   @Post()
-  registerUser(@Body() registerDto: RegisterDto) {
+  registerUser(@Body() registerDto: RegisterUserDto) {
     const id = registerDto.id;
     return this.userService.existsById(id).pipe(
       mergeMap((exists) => {
