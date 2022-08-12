@@ -1,11 +1,9 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
-
 import { hash, compare } from 'bcrypt';
 import { RoleType } from '../../shared/enum/role-type';
 import { AccountStatus } from '../../shared/enum/account-status';
 import { RegisterUserDto } from '../../user/dto/register.user.dto';
 import { UpdateUserDto } from '../../user/dto/update.user.dto';
-
 
 @Entity('user')
 export class UserEntity {
@@ -21,14 +19,14 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
-  department: string;
-
-  @Column()
-  role: RoleType;
-
-  @Column()
-  status: AccountStatus;
+  // @Column()
+  // department: string;
+  //
+  // @Column()
+  // role: RoleType;
+  //
+  // @Column()
+  // status: AccountStatus;
 
   static async create(data: RegisterUserDto) {
     const user = new UserEntity();
@@ -36,9 +34,9 @@ export class UserEntity {
     user.password = await hash(data.password, 12);
     user.username = data.username;
     user.email = data.email;
-    user.department = data.department;
-    user.role = data.role;
-    user.status = data.status;
+    // user.department = data.department;
+    // user.role = data.role;
+    // user.status = data.status;
     return user;
   }
 
@@ -46,9 +44,9 @@ export class UserEntity {
     const user = new UserEntity();
     user.username = data.username;
     user.email = data.email;
-    user.department = data.department;
-    user.role = data.role;
-    user.status = data.status;
+    // user.department = data.department;
+    // user.role = data.role;
+    // user.status = data.status;
     return user;
   }
 }

@@ -26,12 +26,12 @@ export class RegisterUserDto {
   @IsString()
   readonly password: string;
 
-  @IsString()
-  readonly department: string;
-
-  @IsEnum([RoleType.SENIOR, RoleType.MIDDLE, RoleType.JUNIOR])
-  readonly role: RoleType;
-
-  @IsEnum([AccountStatus.VALID, AccountStatus.INVALID])
-  readonly status: AccountStatus;
+  // @IsString()
+  // readonly department: string;
+  //
+  // @IsEnum([RoleType.SENIOR, RoleType.MIDDLE, RoleType.JUNIOR])
+  // readonly role: RoleType;
+  //
+  // @IsEnum([AccountStatus.VALID, AccountStatus.INVALID])
+  // readonly status: AccountStatus;
 }

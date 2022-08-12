@@ -15,15 +15,15 @@ export class UpdateUserDto {
   @IsString()
   readonly password: string;
 
-  @IsOptional()
-  @IsString()
-  readonly department: string;
-
-  @IsOptional()
-  @IsEnum([RoleType.SENIOR, RoleType.MIDDLE, RoleType.JUNIOR])
-  readonly role: RoleType;
-
-  @IsOptional()
-  @IsEnum([AccountStatus.VALID, AccountStatus.INVALID])
-  readonly status: AccountStatus;
+  // @IsOptional()
+  // @IsString()
+  // readonly department: string;
+  //
+  // @IsOptional()
+  // @IsEnum([RoleType.SENIOR, RoleType.MIDDLE, RoleType.JUNIOR])
+  // readonly role: RoleType;
+  //
+  // @IsOptional()
+  // @IsEnum([AccountStatus.VALID, AccountStatus.INVALID])
+  // readonly status: AccountStatus;
 }
