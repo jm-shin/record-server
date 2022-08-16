@@ -25,7 +25,6 @@ export class AuthService {
 
       mergeMap((user) => {
         const { id, password, username, email } = user;
-        console.log(pass, password);
         return from(compare(pass, password)).pipe(
           map((m) => {
             if (m) {
