@@ -5,12 +5,13 @@ import {
   Get,
   Param,
   Post,
-  Res,
+  Res, UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { mergeMap } from 'rxjs';
 import { Response } from 'express';
 import { RegisterUserDto } from './dto/register.user.dto';
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 
 @Controller('register')
 export class RegisterController {
@@ -39,6 +40,7 @@ export class RegisterController {
     );
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('dupcheck/id/:id')
   async duplicateCheckId(@Param('id') id: string, @Res() res: Response) {
     const exists = await this.userService.checkById(id);
@@ -49,6 +51,7 @@ export class RegisterController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('dupcheck/email/:email')
   async duplicateCheckEmail(
     @Param('email') email: string,

@@ -14,11 +14,11 @@ import { UpdateUserDto } from './dto/update.user.dto';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { map } from 'rxjs/operators';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/users')
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
   getUser(@Param('id') id: string): Observable<Partial<UserEntity>> {
     return from(this.userService.findById(id)).pipe(
