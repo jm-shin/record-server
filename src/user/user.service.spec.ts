@@ -6,11 +6,9 @@ import { Repository } from 'typeorm';
 import { USER_REPOSITORY } from '../database/database.constants';
 import { lastValueFrom } from 'rxjs';
 
-const mockUserRepository = () => ({
+const mockUserRepository = {
   findOne: jest.fn(),
-  save: jest.fn(),
-  create: jest.fn(),
-});
+};
 
 describe('UserService', () => {
   let service: UserService;
@@ -23,7 +21,7 @@ describe('UserService', () => {
         UserService,
         {
           provide: USER_REPOSITORY,
-          useValue: mockUserRepository(),
+          useValue: mockUserRepository,
         },
       ],
     }).compile();
@@ -37,24 +35,20 @@ describe('UserService', () => {
   });
 
   describe('findById', () => {
-    it('찾는 아이디가 있으면 200를 반환한다.', async () => {
-      jest.spyOn(userRepository, 'findOne').mockImplementation(() => {
-        return {
-          exec: jest.fn().mockResolvedValue({
-            id: 'user01',
-            username: 'jmshin',
-            password: '######',
-            email: 'user01@email.com',
-          } as UserEntity),
-        } as any;
+    it('return one result', async () => {
+      jest.spyOn(userRepository, 'findOne').mockResolvedValue({
+        id: 'user01',
+        password: '#####',
+        username: 'jm shin',
+        email: 'user01@example.com',
       });
 
       const foundUser = await lastValueFrom(service.findById('user01'));
       expect(foundUser).toEqual({
         id: 'user01',
-        username: 'jmshin',
-        password: '######',
-        email: 'user01@email.com',
+        password: '#####',
+        username: 'jm shin',
+        email: 'user01@example.com',
       });
     });
   });
