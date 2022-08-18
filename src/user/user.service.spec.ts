@@ -50,6 +50,10 @@ describe('UserService', () => {
         username: 'jm shin',
         email: 'user01@example.com',
       });
+      expect(userRepository.findOne).lastCalledWith({
+        where: { id: 'user01' },
+      });
+      expect(userRepository.findOne).toBeCalledTimes(1);
     });
   });
 });

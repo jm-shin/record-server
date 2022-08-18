@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Post,
-  Res, UseGuards,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { mergeMap } from 'rxjs';

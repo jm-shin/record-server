@@ -1,0 +1,20 @@
+[
+    {
+        "title": "녹취 관리",
+        "list": [
+            {"admin": "play", "path": "/main/play-file-management", "text": "재생 & 파일관리"},
+            {"admin": "statistics", "path": "/main/statistics-management", "text": "통계 관리"},
+            {"admin": "nms", "path": "/main/nms", "text": "NMS 연동"},
+            {"admin": "process", "path": "/main/process-monitor", "text": "프로세스 감시"}
+        ]
+    },
+    {
+        "title": "시스템 관리",
+        "list": [
+            {"admin": "acLookup", "path": "/management/account", "text": "계정 조회"},
+            {"admin": "acCreate", "path": "/management/account-create", "text": "계정 생성"},
+            {"admin": "auLookup", "path": "/management/authority", "text": "권한 조회"},
+            {"admin": "auCreate", "path": "/management/authority-create", "text": "권한 생성"}
+        ]
+    }
+]

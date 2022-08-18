@@ -1,0 +1,46 @@
+[
+    {
+        "name": "super",
+        "authority": {
+            "super": 1,
+            "play": 0,
+            "download": 0,
+            "statistics": 0,
+            "nms": 0,
+            "process": 0,
+            "acLookup": 0,
+            "acCreate": 0,
+            "auLookup": 0
+        }
+    },
+    {
+        "name": "manager",
+        "authority": {
+            "super": 0,
+            "play": 1,
+            "download": 1,
+            "statistics": 1,
+            "nms": 1,
+            "process": 0,
+            "acLookup": 0,
+            "acCreate": 0,
+            "auLookup": 0,
+            "auCreate": 0
+        }
+    },
+    {
+        "name": "test",
+        "authority": {
+            "super": 0,
+            "play": 1,
+            "download": 1,
+            "statistics": 1,
+            "nms": 1,
+            "process": 0,
+            "acLookup": 1,
+            "acCreate": 1,
+            "auLookup": 0,
+            "auCreate": 0
+        }
+    }
+]
