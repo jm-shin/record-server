@@ -97,4 +97,15 @@ describe('UserService', () => {
       expect(userRepository.findOne).toBeCalledTimes(1);
     });
   });
+
+  describe('existsById', () => {
+    it('should not exist return false', async () => {
+      jest.spyOn(userRepository, 'count').mockResolvedValue(0);
+      expect(service.existsById).toEqual(false);
+    });
+    it('should exist return true', async () => {
+      jest.spyOn(userRepository, 'count').mockResolvedValue(1);
+      expect(service.existsById).toEqual(true);
+    });
+  });
 });
