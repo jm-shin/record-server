@@ -8,6 +8,10 @@ import { lastValueFrom } from 'rxjs';
 
 const mockUserRepository = {
   findOne: jest.fn(),
+  save: jest.fn(),
+  update: jest.fn(),
+  count: jest.fn(),
+  delete: jest.fn(),
 };
 
 describe('UserService', () => {
@@ -34,20 +38,57 @@ describe('UserService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('registerUSer', () => {
+    it('should return registerInfo without password', async () => {
+      const data = {
+        id: 'user01',
+        password: '#####',
+        username: 'jm',
+        email: 'user01@example.com',
+      };
+
+      jest.spyOn(userRepository, 'save').mockResolvedValueOnce(data);
+
+      const registerUser = await service.registerUser(data);
+      expect(registerUser).toEqual({
+        id: 'user01',
+        username: 'jm',
+        email: 'user01@example.com',
+      });
+    });
+  });
+
+  describe('updateUser', () => {
+    it('should ', async () => {
+      const updateInfo = {
+        username: 'jongmin',
+        email: 'change_email@example.com',
+      };
+      jest.spyOn(userRepository, 'count').mockResolvedValue(1);
+      jest
+        .spyOn(userRepository, 'update')
+        .mockResolvedValue({ generatedMaps: [], raw: [], affected: 1 });
+
+      await service.updateUser('user01', updateInfo);
+      expect(userRepository.update).lastCalledWith('user01', { ...updateInfo });
+    });
+  });
+
   describe('findById', () => {
-    it('return one result', async () => {
+    it('should return one result', async () => {
       jest.spyOn(userRepository, 'findOne').mockResolvedValue({
         id: 'user01',
         password: '#####',
-        username: 'jm shin',
+        username: 'jm',
         email: 'user01@example.com',
       });
 
       const foundUser = await lastValueFrom(service.findById('user01'));
+
       expect(foundUser).toEqual({
         id: 'user01',
         password: '#####',
-        username: 'jm shin',
+        username: 'jm',
         email: 'user01@example.com',
       });
       expect(userRepository.findOne).lastCalledWith({

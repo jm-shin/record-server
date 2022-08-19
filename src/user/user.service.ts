@@ -18,7 +18,7 @@ export class UserService {
     @Inject(USER_REPOSITORY) private userRepository: Repository<UserEntity>,
   ) {}
 
-  async registerUser(data: RegisterUserDto) {
+  async registerUser(data: RegisterUserDto): Promise<Partial<UserEntity>> {
     const registerInfo = await UserEntity.create(data);
     const registerUser = await this.userRepository.save(registerInfo);
     delete registerUser['password'];
