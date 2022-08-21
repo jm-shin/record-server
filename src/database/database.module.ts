@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { mysqlDatabaseProviders } from './mysql-database.providers';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot()],
   providers: [...mysqlDatabaseProviders],
   exports: [...mysqlDatabaseProviders],
 })

@@ -55,13 +55,13 @@ export class UserService {
 
   existsById(id: string): Observable<boolean> {
     return from(this.userRepository.count({ where: { id } })).pipe(
-      map((m) => !!m),
+      map((exists) => !!exists),
     );
   }
 
   existsByEmail(email: string): Observable<boolean> {
     return from(this.userRepository.count({ where: { email } })).pipe(
-      map((m) => !!m),
+      map((exists) => !!exists),
     );
   }
 

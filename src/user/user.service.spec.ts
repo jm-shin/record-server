@@ -100,12 +100,14 @@ describe('UserService', () => {
 
   describe('existsById', () => {
     it('should not exist return false', async () => {
-      jest.spyOn(userRepository, 'count').mockResolvedValue(0);
-      expect(service.existsById).toEqual(false);
+      jest.spyOn(userRepository, 'count').mockResolvedValueOnce(0);
+      const exists = await lastValueFrom(service.existsById('not_exist_user'));
+      expect(exists).toEqual(false);
     });
     it('should exist return true', async () => {
       jest.spyOn(userRepository, 'count').mockResolvedValue(1);
-      expect(service.existsById).toEqual(true);
+      const notExists = await lastValueFrom(service.existsById('exist_user'));
+      expect(notExists).toEqual(true);
     });
   });
 });
